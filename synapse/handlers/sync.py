@@ -3105,17 +3105,17 @@ def _calculate_state(
     # even try; it is ether omitted or plonked into `state` as if it were at the start
     # of the timeline, depending on what else is in the timeline.)
 
-    state_ids = (
+    state_before_ids = (
         (timeline_end_ids | timeline_start_ids)
         - previous_timeline_end_ids
         - timeline_contains_ids
     )
 
-    after_state_ids = timeline_end_ids - timeline_contains_ids - timeline_start_ids
+    state_after_ids = timeline_end_ids - timeline_contains_ids - timeline_start_ids
 
     return [
-        {event_id_to_state_key[e]: e for e in state_ids},
-        {event_id_to_state_key[e]: e for e in after_state_ids},
+        {event_id_to_state_key[e]: e for e in state_before_ids},
+        {event_id_to_state_key[e]: e for e in state_after_ids},
     ]
 
 
